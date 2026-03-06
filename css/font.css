@@ -1,0 +1,20 @@
+@font-face {
+    font-family: PlayfairDisplay-Italic;
+    src: url(../fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: FiraSans-ExtraBoldItalic;
+    src: url(../fonts/FiraSans-ExtraBoldItalic.ttf);
+}
+@font-face {
+    font-family: TenorSans-Regular;
+    src: url(../fonts/TenorSans-Regular.ttf);
+}
+
+.navigation-bar a {
+    font-family: FiraSans-ExtraBoldItalic;
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 20px;
+    display: block;
+}

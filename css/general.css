@@ -1,0 +1,84 @@
+/* General */
+body {
+    background-color: #F5E7C6;
+}
+/* Laptop */
+@media (max-width: 1440px) {
+    header {
+        margin: 10px;
+    }
+
+    .navigation-bar {
+    background-color: #FA8112;
+    overflow: hidden;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    }      
+
+    .navigation-position {
+        display: flex;
+        align-items: center;
+    }
+
+    .navigation-position a {
+        display: block;
+        padding: 14px 16px;
+        text-decoration: none;
+        color: black;
+    }
+
+    .navigation-position nav {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .navigation-position nav a {
+        display: block;
+        padding: 14px 16px;
+        text-decoration: none;
+        color: black;
+    }
+}
+
+
+/* Phone */
+@media (max-width: 600px) {
+    header {
+        margin: 10px;
+    }
+
+    .navigation-bar {
+    background-color: #FA8112;
+    overflow: hidden;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    }      
+
+    .navigation-position {
+        display: flex;
+        align-items: center;
+    }
+
+    .navigation-position a {
+        display: block;
+        padding: 14px 16px;
+        text-decoration: none;
+        color: black;
+    }
+
+    .navigation-position nav {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .navigation-position nav a {
+        display: block;
+        padding: 14px 16px;
+        text-decoration: none;
+        color: black;
+    }
+}
+
+

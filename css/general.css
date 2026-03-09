@@ -1,19 +1,21 @@
+/* General CSS for the RoarMore website */
+/* Note: only put general here
+
+
 /* General */
 body {
-    background-color: #F5E7C6;
+    background-color: #FAF3E1;
+    margin: 0;
+    padding: 0;
 }
-/* Laptop */
-@media (max-width: 1440px) {
-    header {
-        margin: 10px;
-    }
 
+/* Desktop */
+@media (min-width: 1440px) {
     .navigation-bar {
-    background-color: #FA8112;
-    overflow: hidden;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    }      
+        background-color: #FA8112;
+        overflow: hidden;
+
+    }
 
     .navigation-position {
         display: flex;
@@ -27,18 +29,76 @@ body {
         color: black;
     }
 
+
     .navigation-position nav {
         margin-left: auto;
         display: flex;
         align-items: center;
     }
 
-    .navigation-position nav a {
-        display: block;
-        padding: 14px 16px;
-        text-decoration: none;
-        color: black;
+    .main-content,
+    .content {
+        display: flex;
     }
+/* Background */
+    .banner {
+        background-color: #FA8112;
+    }
+    #content-a, #content-c {
+        background-image: url('../images/landing_page_contentA_bg.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    #content-b {
+        background-color: #F5E7C6;
+    }
+
+    .main-content-text,
+    .content-text {
+        padding: 5%;
+    }
+
+    .content-text {
+        text-align: left;
+    }
+
+    #content-a .content-text a,
+    #content-c .content-text a {
+        background-color: #F5E7C6;
+        color: black;
+        text-decoration: none;
+        padding: 10px 20px;
+    }
+
+    #content-b .content-text a {
+        background-color: #FAF3E1;
+        color: black;
+        text-decoration: none;
+        padding: 10px 20px;
+    }
+
+    .content-image-background {
+        margin: 5% 10% 5% 5%;
+        background-color: #F5E7C6;
+        -webkit-border-radius: 10px;
+        border-radius: 50px 50px 50px 50px;
+    }
+
+    #content-b .content-image-background {
+        margin: 5% 10% 5% 5%;
+        background-color: #FAF3E1;
+        -webkit-border-radius: 10px;
+        border-radius: 50px 50px 50px 50px;
+    }
+
+    .main-content-image img,
+    .content-image img {
+        height: 50vh;
+        width: auto;
+    }
+
+
 }
 
 
@@ -49,11 +109,10 @@ body {
     }
 
     .navigation-bar {
-    background-color: #FA8112;
-    overflow: hidden;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    }      
+        overflow: hidden;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
 
     .navigation-position {
         display: flex;
@@ -80,5 +139,3 @@ body {
         color: black;
     }
 }
-
-

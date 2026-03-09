@@ -35,7 +35,11 @@
     font-family: TenorSans-Regular;
 }
 
-.content-text h1 {
+#content-a .content-text h1, #content-c .content-text h1 {
     font-family: PlayfairDisplay-Italic;
     font-size: 5em;
+    color: #fff;
+}
+#content-a .content-text p {
+    color: #fff;
 }

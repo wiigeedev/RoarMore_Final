@@ -11,6 +11,22 @@ body {
 
 /* Desktop */
 @media (min-width: 1440px) {
+/* Background */
+    .banner {
+        background-color: #FA8112;
+        padding: 5% 0% 5% 5%;
+    }
+    #content-a {
+        background-image: url('../img/landing_page_contentA_bg.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    #content-b {
+        background-color: #F5E7C6;
+    }
+
+/* Navigation Bar */
     .navigation-bar {
         background-color: #FA8112;
         overflow: hidden;
@@ -28,8 +44,7 @@ body {
         text-decoration: none;
         color: black;
     }
-
-
+    
     .navigation-position nav {
         margin-left: auto;
         display: flex;
@@ -40,21 +55,7 @@ body {
     .content {
         display: flex;
     }
-/* Background */
-    .banner {
-        background-color: #FA8112;
-    }
-    #content-a, #content-c {
-        background-image: url('../images/landing_page_contentA_bg.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    #content-b {
-        background-color: #F5E7C6;
-    }
 
-    .main-content-text,
     .content-text {
         padding: 5%;
     }

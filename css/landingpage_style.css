@@ -35,7 +35,7 @@
         background-color: #ff891c;
         background-image: url(../img/TigerPawBackground.png);
         background-size: 80px;
-        padding: 12% 0% 10% 5%;
+        padding: 12% 0% 15% 5%;
         animation: background-animation 20s linear infinite;
     }
 
@@ -111,12 +111,25 @@
         font-family: TenorSans-Regular;
     }
 
-    #content-a .content-text h1, #content-c .content-text h1 {
+    #content-a .content-text h1 {
         font-family: PlayfairDisplay-Italic;
         font-size: 5em;
         color: #fff;
     }
+    #content-b .content-text h1 {
+        font-family: PlayfairDisplay-Italic;
+        font-size: 5em;
+        color: #000000;
+    }
+    #content-c .content-text h1 {
+        font-family: PlayfairDisplay-Italic;
+        font-size: 5em;
+        color: #ffffff;
+    }
     #content-a .content-text p {
+        color: #fff;
+    }
+    #content-c .content-text p {
         color: #fff;
     }
 

@@ -6,9 +6,26 @@
     animation-range: 100px 400px;
 }
 
+.banner {
+    background-color: #ff891c;
+    background-image: url(../img/TigerPawBackground.png);
+    background-size: 80px;
+    padding: 12% 0% 10% 5%;
+    animation: background-animation 20s linear infinite;
+}
+
 @keyframes fade-in {
     to {
         scale: 1;
         opacity: 1;
+    }
+}
+
+@keyframes background-animation {
+    0% {
+        background-position: 50% 0%;
+    }
+    100% {
+        background-position: 0% 50%;
     }
 }

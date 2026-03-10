@@ -10,10 +10,35 @@
         padding: 0;
     }
 
+    /* Fonts */
+    @font-face {
+        font-family: PlayfairDisplay-Italic;
+        src: url(../fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf);
+    }
+
+    @font-face {
+        font-family: FiraSans-ExtraBoldItalic;
+        src: url(../fonts/FiraSans-ExtraBoldItalic.ttf);
+    }
+
+    @font-face {
+        font-family: TenorSans-Regular;
+        src: url(../fonts/TenorSans-Regular.ttf);
+    }
+    
+
     /* Navigation Bar */
         .navigation-bar {
             background-color: #080808e5;
             overflow: hidden;
+        }
+
+        .navigation-bar a {
+        font-family: TenorSans-Regular;
+        color: #fff;
+        text-decoration: none;
+        padding: 14px 20px;
+        display: block;
         }
 
         .navigation-position {
@@ -33,3 +58,12 @@
             display: flex;
             align-items: center;
         }
+
+    /* footer */
+    footer {
+        background-color: #080808e5;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-family: TenorSans-Regular;
+    }

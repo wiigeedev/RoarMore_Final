@@ -63,14 +63,6 @@
         src: url(../fonts/TenorSans-Regular.ttf);
     }
 
-    .navigation-bar a {
-        font-family: TenorSans-Regular;
-        color: #fff;
-        text-decoration: none;
-        padding: 14px 20px;
-        display: block;
-    }
-
     .main-content-text {
         color: #fff;
     }
@@ -93,7 +85,7 @@
     #content-a .content-text p {
         color: #fff;
     }
-    
+
 /* Banner */
     .main-content,
     .content {

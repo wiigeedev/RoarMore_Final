@@ -3,59 +3,86 @@
 
 
 /* General */
-    /* Body (default) */
-    body {
-        margin: 0;
-        padding: 0;
-    }
+/* Body (default) */
+body {
+    margin: 0;
+    padding: 0;
+}
 
-    /* Fonts */
-    @font-face {
-        font-family: PlayfairDisplay-Italic;
-        src: url(../fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf);
-    }
+/* Fonts */
+@font-face {
+    font-family: PlayfairDisplay-Italic;
+    src: url(../fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf);
+}
 
-    @font-face {
-        font-family: FiraSans-ExtraBoldItalic;
-        src: url(../fonts/FiraSans-ExtraBoldItalic.ttf);
-    }
+@font-face {
+    font-family: FiraSans-ExtraBoldItalic;
+    src: url(../fonts/FiraSans-ExtraBoldItalic.ttf);
+}
 
-    @font-face {
-        font-family: TenorSans-Regular;
-        src: url(../fonts/TenorSans-Regular.ttf);
-    }
+@font-face {
+    font-family: TenorSans-Regular;
+    src: url(../fonts/TenorSans-Regular.ttf);
+}
+
+
+/* Navigation Bar */
+.navigation-bar {
+    background-color: #0808083e;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navigation-bar a {
+    font-family: TenorSans-Regular;
+    font-size: 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 20px;
+    display: block;
     
+}
 
-    /* Navigation Bar */
-        .navigation-bar {
-            background-color: #080808e5;
-            overflow: hidden;
-        }
+.navigation-bar a:hover {
+    color:#ff9900;
 
-        .navigation-bar a {
-        font-family: TenorSans-Regular;
-        color: #ffffff;
-        text-decoration: none;
-        padding: 14px 20px;
-        display: block;
-        }
+}
 
-        .navigation-position {
-            display: flex;
-            align-items: center;
-        }
-        
-        .navigation-position nav {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-        }
 
-    /* footer */
-    footer {
-        background-color: #080808e5;
-        color: white;
-        text-align: center;
-        padding: 10px;
-        font-family: TenorSans-Regular;
-    }
+
+.navigation-position {
+    display: flex;
+    align-items: center;
+}
+
+.navigation-position nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+/* bottom navigation bar */
+.bottom-navigation-bar {
+    background-color: #0808083e;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* footer */
+footer {
+    background-color: #080808e5;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-family: TenorSans-Regular;
+}

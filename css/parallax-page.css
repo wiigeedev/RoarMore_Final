@@ -137,6 +137,93 @@
     /* Let clicks pass to nav if needed */
 }
 
+/* --- Three-Box Layout Modifiers --- */
+.three-margin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 5vh 5vw;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.three-box {
+    flex: 1;
+    max-width: 400px;
+    padding: 2.5rem;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    background-color: #ffffff13;
+    backdrop-filter: blur(15px);
+    border-top: 1px solid #ffffff25;
+    border-left: 1px solid #ffffff25;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+.three-box:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.4);
+    background-color: #ffffff1a;
+}
+
+.three-box img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #ffffff15;
+}
+
+.three-box h1 {
+    font-size: 2.2rem;
+    margin: 0;
+    font-family: 'FiraSans-ExtraBoldItalic', sans-serif;
+    background: linear-gradient(180deg, #fff 0%, #ff9900 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.three-box p {
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.9;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.three-box a {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.8rem 1.8rem;
+    background: linear-gradient(135deg, #ff9900 0%, #ff5500 100%);
+    color: white;
+    text-decoration: none;
+    font-family: 'FiraSans-ExtraBoldItalic', sans-serif;
+    text-transform: uppercase;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 85, 0, 0.3);
+    cursor: pointer;
+}
+
+.three-box a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 85, 0, 0.5);
+    background: linear-gradient(135deg, #ffaa00 0%, #ff6600 100%);
+}
+
 .text-box h1 {
     font-family: 'FiraSans-ExtraBoldItalic', sans-serif;
     font-size: 4rem;
@@ -247,7 +334,7 @@
     animation-range: 25% 50%;
 }
 
-.class_3 .Rawrie {
+.class_3 .three-margin {
     animation: slideInOut linear both;
     animation-timeline: scroll(root);
     animation-range: 50% 75%;

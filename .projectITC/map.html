@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../css/general.css">
+<link rel ="stylesheet" href="style.css">
+<title>Campus Interactive Map</title>
+</head>
+<body>
+    <header>
+      <div class="navigation-bar">
+          <div class="navigation-position">
+              <a href="../html/index.html">RoarMore</a>
+
+              <nav>
+                  <a href="../.projectITC/map.html">Explore</a>
+                  <a href="../html/about.html">About</a>
+                  <a href="contact.html">Contact</a>
+              </nav>
+          </div>
+      </div>
+    </header>
+
+<div id="viewport">
+  <div id="mapLayer">
+    <div id="imgWrapper">
+
+      <img id="mapImg"  src="map.png" alt="CEIT MAP" />
+      <button class="building-btn" data-building="dceee" style="left:25%; top:37%;">DCEEE</button>
+      <button class="building-btn" data-building="diet"  style="left:42%; top:23%;">DIET</button>
+      <button class="building-btn" data-building="dit"   style="left:73%; top:27%;">DIT</button>
+      <button class="building-btn" data-building="ceit"  style="left:78%; top:56%;">CEIT</button>
+
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="zoom-btn" id="zoomIn">+</button>
+  <button class="zoom-btn" id="zoomOut">−</button>
+</div>
+
+<div id="popupOverlay">
+
+  <div id="infoCard">
+    <div id="cardHeader">
+      <span id="cardTitle">Department Name</span>
+      <button id="cardCloseBtn">✕</button>
+    </div>
+    <div id="cardPhoto">
+      <img id="cardPhotoImg" src="" alt="Building photo"/>
+    </div>
+    <div id="cardDesc">
+      <p id="cardDescText"></p>
+    </div>
+    <button id="enterBtn">Enter</button>
+  </div>
+
+ 
+  <div id="speechBubble">
+    <p id="speechText"></p>
+  </div>
+
+ 
+  <img id="roary" src ="roary.png"  alt="Roary the mascot">
+</div>
+
+<script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+<script src ="project.js"></script>
+</body>
+</html>

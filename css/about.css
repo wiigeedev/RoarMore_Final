@@ -1,0 +1,319 @@
+body {
+  background-color:  #FA8112;
+  background-size: 80px 140px;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  color: white;
+}
+
+@keyframes scroll-animation {
+  from{
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0px)
+  }
+
+}
+
+
+@keyframes tabs-scroll-animation {
+  from{
+    opacity:0.8;
+    transform:translateY(-40px) ;
+  }
+  to{
+    opacity:1;
+    transform:translateY(0px);
+  }
+  
+}
+@keyframes box-animation {
+  from{
+    opacity: 0.8;
+    transform: translateY(15px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.navigation-bar {
+  background-color: #080808e5;
+  overflow: hidden;
+  
+}
+.navigation-position {
+  display: flex;
+  align-items: center;
+  
+}
+
+.navigation-position a {
+  display: block;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  transition: transform 0.3s ease-in-out;
+}
+.navigation-position a:hover{
+  color:#ff7a00;
+  scale: calc(0.9);
+  transform: translateY(-3px);
+}    
+
+.navigation-position nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.background {
+  height: 500px;
+  margin: 5% 10% 0;
+  padding-top: 20px;
+  text-align: center;
+  background-color: #00000040;
+  border-radius: 20px;
+}
+
+.title {
+  color: antiquewhite;
+  font-size: 25px;
+  padding-bottom: 0%;
+  position: relative;
+}
+
+.title, h1{
+  margin: 0%;
+  position: relative;
+  margin-top: 10%;
+}
+
+
+.contents {
+  font-size: 25px;
+  padding-top: 0%;
+  margin:0%;
+
+}
+
+.contents h2 {
+  font-size:40px;
+  margin-top: 0%;
+  margin: 0%;
+}
+
+.contents p {
+  font-size: 16px;
+  margin: 0%;
+}
+
+.department-tabs{
+  max-width: 80%;
+  margin: auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.departments {
+  text-align: center;
+  margin-top: 25%;
+  padding-right: 20px;
+
+  animation: scroll-animation linear ; 
+  animation-timeline: view();
+  animation-range: entry 0%;
+}
+
+.departments h1 {
+  font-size: 42px;
+}
+
+.description {
+  min-width: 0;
+  word-wrap: break-word;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.program-tabs{
+  max-width: 85%;
+  margin:auto;
+  text-align: center;
+}
+.program {
+  margin-top: 10% ;
+  text-align: center;
+  padding:0%;
+
+  animation: scroll-animation  linear ; 
+  animation-timeline: view();
+  animation-range: entry 0;
+}
+
+.program h1{
+  font-size: 42px;
+
+}
+
+.staff{
+  margin-top: 10%;
+  text-align: center;
+
+  animation: scroll-animation linear ; 
+  animation-timeline: view();
+  animation-range: entry 5%;
+}
+.staff-tabs{
+  max-width: 75%;
+  margin:auto;
+  text-align: center;
+
+}
+
+input {
+  display: none;
+}
+
+.tabs {
+  margin: 40px 0 20px;
+  gap: 6px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tabs label {
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #00000040;
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px #0a0a0a1a;
+  transition: transform 0.2s ease-in-out;
+
+  animation: tabs-scroll-animation linear ; 
+  animation-timeline: view();
+  animation-range: entry 5%;
+}
+
+.tabs label:hover {
+  background: #00000073;
+  transform:translateY(-9px);
+  scale: calc(1.1);
+}
+
+.department-tabs #tab1:checked ~ .DIT,
+.department-tabs #tab2:checked ~ .DCEEE, 
+.department-tabs #tab3:checked ~ .DIET,
+.department-tabs #tab4:checked ~ .DAFE, 
+.department-tabs #tab5:checked ~ .DCEA,
+.program-tabs #tab6:checked ~ .BSIT, 
+.program-tabs #tab7:checked ~ .BSCS, 
+.program-tabs #tab8:checked ~ .BSECE, 
+.program-tabs #tab9:checked ~ .BSEE, 
+.program-tabs #tab10:checked ~ .BSIE, 
+.program-tabs #tab11:checked ~ .BSABE, 
+.program-tabs #tab12:checked ~ .BSARCH,
+.program-tabs #tab13:checked ~ .BSCpE,
+.program-tabs #tab14:checked ~ .BSCE,
+.program-tabs #tab15:checked ~ .BSINDT-ET,
+.program-tabs #tab16:checked ~ .BSINDT-AT,
+.program-tabs #tab17:checked ~ .BSINDT-EX,
+.staff-tabs #tab18:checked ~ .DIT-BUILDING, 
+.staff-tabs #tab19:checked ~ .ES-BUILDING, 
+.staff-tabs #tab20:checked ~ .DIET-BUILDING, 
+.staff-tabs #tab21:checked ~ .CEIT-BUILDING{ 
+  display: block;
+}
+
+.box { 
+  background:#161616;                  /*background: #00000040;*/
+  padding: 50px;
+  margin: 20px;
+  border-radius: 12px;
+  gap:200px;
+  text-align: left;
+  display: none;
+  align-items: stretch;
+  
+  animation: box-animation 0.6s ease-out;
+}
+
+.box h2 {
+  margin-top: 0%;
+}
+    
+.box .image {
+  height: 300px;
+  width: 100%;
+  background: linear-gradient(#ff7a00, #ffb347);
+  border-radius: 15px;
+}
+
+
+.table {
+  background-color: #272626;
+  padding: 10px;
+  border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.9); 
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.9);
+}
+
+table {
+  width: 100%;
+  height: 20%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 0% auto;
+  padding: 0%;
+}
+
+td {
+  padding: 10px 12px;
+  border-radius:3px;
+  text-align: left;
+  font-size: small;
+}
+
+tr {
+  border-radius:15px;
+  transition: 0.3s;
+}
+
+tr:nth-child(odd) {
+  background: #1e1e1e;
+}
+tr:nth-child(even) {
+  background: #161616;
+}
+tr:hover {
+  background: #2a2a2a;
+}
+
+th {
+  background: #57524c;
+  font-weight: bold;
+}
+.department-table{
+  background-color: #272626;
+  padding: 10px;
+  border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.9); 
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.9);
+}
+
+.department-table ,td , h2{
+  text-align: center;
+}
+
+footer {
+  text-align:center;
+  padding:12px;
+  color:white;
+  background-color: #080808f8;
+}

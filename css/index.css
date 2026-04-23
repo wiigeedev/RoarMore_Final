@@ -1,0 +1,382 @@
+/* ==========================================================================
+   1. Layout & Structure
+   ========================================================================== */
+.background-section {
+    position: relative;
+}
+
+.sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    z-index: 10;
+    margin-bottom: 100vh;
+}
+
+/* ==========================================================================
+   2. Layer Management
+   ========================================================================== */
+body {
+    background-color: #ff8400;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.class_1 {
+    z-index: 4;
+    background-image: url('../img/testing/bg\ \(1\).png');
+}
+
+.class_2,
+.class_3 {
+    position: relative;
+    height: auto;
+    width: 100%;
+    z-index: 3;
+    background-position: bottom;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.class_3 {
+    background-image: url('../img/testing/bg\ \(3\).png');
+}
+
+
+
+
+/* ==========================================================================
+   3. Content Components
+   ========================================================================== */
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-family: 'FiraSans-ExtraBoldItalic', sans-serif;
+    background-color: #ffffff13;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid #ffffff25;
+    border-left: 1px solid #ffffff25;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.content {
+    display: flex;
+    justify-content: center;
+    gap: 8vw;
+    align-items: flex-end;
+    padding: 5vh 5vw;
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.bounce {
+    animation: letter-bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.title-box {
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 90%;
+    border-radius: 20px;
+    pointer-events: auto;
+}
+
+.main-title {
+    font-family: FiraSans-ExtraBoldItalic, sans-serif;
+    color: #ff8400;
+
+    justify-content: center;
+    display: flex;
+    font-size: 10rem;
+}
+
+.title-letter.white {
+    font-family: FiraSans-ExtraBoldItalic, sans-serif;
+    color: #ffffff;
+}
+
+.sub-title {
+    font-family: Tanker-Regular, sans-serif;
+    color: white;
+    text-shadow:
+        -2px -2px 0 #ff8400,
+        2px -2px 0 #ff8400,
+        -2px 2px 0 #ff8400,
+        2px 2px 0 #ff8400,
+        -2px 0px 0 #ff8400,
+        2px 0px 0 #ff8400,
+        0px -2px 0 #ff8400,
+        0px 2px 0 #ff8400;
+
+    justify-content: center;
+    display: flex;
+    font-size: 2rem;
+}
+
+.title-letter {
+    margin: 0;
+    line-height: 1;
+    display: inline-block;
+    cursor: pointer;
+    will-change: transform;
+    user-select: none;
+}
+
+.text-box {
+    max-width: 500px;
+    color: white;
+    margin-bottom: 10vh;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+    pointer-events: none;
+
+    padding: 3rem;
+    border-radius: 20px;
+    background-color: #ffffff13;
+    backdrop-filter: blur(15px);
+    border-top: 1px solid #ffffff25;
+    border-left: 1px solid #ffffff25;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+    /* Let clicks pass to nav if needed */
+}
+
+.text-box h1 {
+    font-family: 'FiraSans-ExtraBoldItalic', sans-serif;
+    font-size: 4rem;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #fff 0%, #ff9900 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.text-box p {
+    font-family: 'TenorSans-Regular', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.text-scroll {
+    padding-block: 8px;
+    overflow: hidden;
+    user-select: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.text-scroll ul {
+    color: #fff;
+
+    list-style: none;
+    flex-shrink: 0;
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.text-scroll {
+    animation-play-state: paused;
+}
+
+#right-left.text-scroll ul {
+    animation: text-scroll-right-left 40s linear infinite;
+}
+
+#left-right.text-scroll ul {
+    animation: text-scroll-left-right 40s linear infinite;
+}
+
+.Rawrie {
+    flex-shrink: 0;
+    width: 45vw;
+    max-width: 700px;
+    min-width: 250px;
+    z-index: 1000;
+    align-self: flex-end;
+}
+
+.Rawrie img {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    display: block;
+    object-fit: contain;
+}
+
+/* ==========================================================================
+   4. Scroll-Driven Animations
+   ========================================================================== */
+
+.class_1 .banner {
+    align-items: center;
+}
+
+.class_1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeOutHold linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0% 50%;
+}
+
+.class_1 .banner,
+.class_1 .text-box {
+    animation: slideOutOnly linear both;
+    animation-timeline: scroll(root);
+    animation-range: 04% 50%;
+}
+
+.class_2 .Rawrie,
+.class_2 .text-box,
+.class_3 .Rawrie,
+.class_3 .text-box {
+    animation: slideInOnly linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+
+/* ==========================================================================
+   5. Keyframes
+   ========================================================================== */
+
+@keyframes fadeOutHold {
+
+    0%,
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+@keyframes slideOutOnly {
+
+    0%,
+    10% {
+        transform: translateY(0);
+    }
+
+    60%,
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slideInOnly {
+    0% {
+        transform: translateY(100%);
+    }
+
+    20%,
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes text-scroll-right-left {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes text-scroll-left-right {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes letter-bounce {
+    0% {
+        transform: translateY(0) scale(1, 1);
+    }
+
+    15% {
+        transform: translateY(0) scale(1.3, 0.7);
+    }
+
+    30% {
+        transform: translateY(-30px) scale(0.8, 1.3);
+    }
+
+    50% {
+        transform: translateY(0) scale(1.1, 0.9);
+    }
+
+    75% {
+        transform: translateY(-5px) scale(1, 1);
+    }
+
+    100% {
+        transform: translateY(0) scale(1, 1);
+    }
+}
+
+
+/* ==========================================================================
+   6. Fonts
+   ========================================================================== */
+
+/* Headline Title */
+@font-face {
+    font-family: FiraSans-ExtraBoldItalic;
+    src: url(../fonts/FiraSans-ExtraBoldItalic.ttf);
+}
+
+@font-face {
+    font-family: 'Tanker-Regular';
+    src: url('../fonts/Tanker-Regular.woff2') format('woff2'),
+        url('../fonts/Tanker-Regular.woff') format('woff'),
+        url('../fonts/Tanker-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+}
+
+/* Sub-Text */
+@font-face {
+    font-family: PlayfairDisplay-Italic;
+    src: url(../fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf);
+}
+
+/* Body Text */
+@font-face {
+    font-family: TenorSans-Regular;
+    src: url(../fonts/TenorSans-Regular.ttf);
+}

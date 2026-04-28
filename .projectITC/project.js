@@ -8,56 +8,52 @@ const btnZoomOut = document.getElementById('zoomOut');
 const viewport   = document.getElementById('viewport');
 
 function setupPanzoom() {
-  const IMG_W  = 1280;
-  const IMG_H  = mapImg.offsetHeight || 681;
-  const vw     = window.innerWidth;
-  const vh     = window.innerHeight;
+  const IMG_W = 1280;
+  const IMG_H = mapImg.naturalHeight || 681;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
 
+  const minScale = Math.max(vw / IMG_W, vh / IMG_H);
+  const maxScale = minScale * 5;
 
-  const minScale   = Math.max(vw / IMG_W, vh / IMG_H);
-  const maxScale   = minScale * 5;
-  const startX     = (vw - IMG_W * minScale) / 2;
-  const startY     = (vh - IMG_H * minScale) / 2;
+  const startX = (vw - IMG_W * minScale) / 2;
+  const startY = (vh - IMG_H * minScale) / 2;
+
+  // initial transform directly by CSS 
+  mapLayer.style.transform = `matrix(${minScale}, 0, 0, ${minScale}, ${startX}, ${startY})`;
 
   const pz = Panzoom(mapLayer, {
     minScale,
     maxScale,
-    startScale : minScale,
-    startX,
-    startY,
-    contain    : 'outside',   
-    canvas     : true,        
-    excludeClass: 'label-btn', 
+    contain: 'outside',
+    canvas: true,
+    excludeClass: 'label-btn',
+    startScale: minScale,
+    startX: startX,
+    startY: startY,
   });
 
-  
-  pz.pan(startX, startY, { animate: false });
-
-  
   viewport.addEventListener('wheel', pz.zoomWithWheel, { passive: false });
 
- 
   mapLayer.addEventListener('panzoomstart', () => viewport.classList.add('dragging'));
-  mapLayer.addEventListener('panzoomend',   () => viewport.classList.remove('dragging'));
+  mapLayer.addEventListener('panzoomend', () => viewport.classList.remove('dragging'));
 
-  // Zoom buttons
   btnZoomIn.addEventListener('click', () => {
     pz.zoomIn();
-    dateZoomOutBtn();
+    updateZoomOutBtn();
   });
   btnZoomOut.addEventListener('click', () => {
     pz.zoomOut();
-    dateZoomOutBtn();
+    updateZoomOutBtn();
   });
 
-  //zoom out disabler
-  function dateZoomOutBtn() {
+  function updateZoomOutBtn() {
     setTimeout(() => {
       btnZoomOut.disabled = pz.getScale() <= minScale + 0.01;
     }, 50);
   }
-  mapLayer.addEventListener('panzoomchange', dateZoomOutBtn);
-  dateZoomOutBtn();
+  mapLayer.addEventListener('panzoomchange', updateZoomOutBtn);
+  updateZoomOutBtn();
 }
 
 if (mapImg.complete && mapImg.naturalWidth > 0) {

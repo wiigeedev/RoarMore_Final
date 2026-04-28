@@ -13,6 +13,7 @@
     overflow: hidden;
     z-index: 10;
     margin-bottom: 100vh;
+    pointer-events: none;
 }
 
 /* ==========================================================================
@@ -52,11 +53,22 @@ body {
     overflow: hidden;
 }
 
+.class_2 {
+    background-image: url('../img/testing/background-map.png');
+}
+
+.class_2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
 .class_3 {
     background-image: url('../img/testing/bg\ \(3\).png');
 }
-
-
 
 
 /* ==========================================================================
@@ -78,7 +90,20 @@ body {
 
 
 .content {
+    display: block;
+    justify-content: center;
+    gap: 8vw;
+    align-items: flex-end;
+    padding: 5vh 5vw;
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.multiple-content {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     gap: 8vw;
     align-items: flex-end;
@@ -91,6 +116,31 @@ body {
 
 .bounce {
     animation: letter-bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.big-button {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.big-button a {
+    display: inline-block;
+    position: relative;
+    z-index: 10;
+
+    font-family: 'FiraSans-ExtraBoldItalic', sans-serif;
+    text-decoration: none;
+    font-size: 9rem;
+    padding: 0;
+
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.big-button a:hover {
+    color: #ff9900;
+    transform: scale(1.1) translateY(-10px);
 }
 
 .title-box {

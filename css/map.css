@@ -1,0 +1,545 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #7fbd39;
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+#viewport {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  cursor: grab;
+  user-select: none;
+}
+
+#viewport.dragging {
+  cursor: grabbing;
+}
+
+#mapLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
+#imgWrapper {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+#mapImg {
+  display: block;
+  width: 1280px;
+  /* fixed display sha*/
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/*buttons per building*/
+.building-btn {
+  position: absolute;
+  background: #ffffff;
+  border: 3px solid #4a3475;
+  border-radius: 995px;
+  padding: 6px 20px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  color: #111;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  transition: filter 0.15s, transform 0.1s;
+  z-index: 20;
+  transform: translate(-50%, -50%);
+}
+
+.building-btn:hover {
+  filter: brightness(0.92);
+  transform: translate(-50%, -50%) scale(1.08);
+  border-color: #d97706;
+}
+
+.building-btn.active {
+  background: #d97706;
+  color: #fff;
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+/* controls */
+.controls {
+  margin-top: 3%;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  z-index: 500;
+}
+
+.zoom-btn {
+  width: 40px;
+  height: 40px;
+  background: #f59e0b;
+  border: none;
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px 5px #f59e0b, 0 5px 18px #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+  border: 5px solid #ffffff;
+  border-radius: 0;
+}
+
+.zoom-btn:hover {
+  background: #d97706;
+  transform: scale(1.08);
+}
+
+.zoom-btn:disabled {
+  background: #bbb;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.5;
+}
+
+#popupOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  pointer-events: none;
+}
+
+#popupOverlay.visible {
+  display: block;
+}
+
+#infoCard {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  height: 630px;
+  transform: translateY(-50%);
+  width: 300px;
+  background: rgb(122, 92, 68, 0.55);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px #111;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  animation: slideInLeft 0.25s ease;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+#cardHeader {
+  padding: 12px 14px 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  background: transparent;
+}
+
+#cardTitle {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: #fff;
+  line-height: 1.35;
+  flex: 1;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+#cardCloseBtn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+  pointer-events: all;
+}
+
+#cardCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+#cardPhoto {
+  margin: 0 12px;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 200px;
+  background: #5a4030;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
+#cardPhotoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#cardDesc {
+  margin: 10px 12px 0;
+  background: #fff;
+  width: 275px;
+  height: 300px;
+  border-radius: 14px;
+  padding: 12px 13px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#cardDescText {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.74rem;
+  color: #333;
+  line-height: 1.55;
+}
+
+#enterBtn {
+  display: block;
+  margin: 10px 15px;
+  width: 120px;
+  background: #fff;
+  color: #111;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+  pointer-events: all;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+#enterBtn:hover {
+  background: #f59e0b;
+}
+
+#speechBubble {
+  position: absolute;
+  top: 300px;
+  right: 150px;
+  width: 350px;
+  height: 150px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 14px 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+  animation: fadeIn 0.3s ease 0.1s both;
+}
+
+#speechBubble::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  right: 60px;
+  border: 14px solid transparent;
+  border-top-color: #fff;
+  border-bottom: 0;
+}
+
+#speechText {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+#roary {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  width: 500px;
+  height: auto;
+  pointer-events: none;
+  animation: fadeIn 0.3s ease 0.05s both;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.4));
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+}
+
+/* npc-btn */
+.npc-btn {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  z-index: 20;
+  pointer-events: all;
+  background: #f59e0b;
+  image-rendering: pixelated;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.npc-btn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 1px #fff, 1px 1px 0 1px rgba(0, 0, 0, 0.7);
+}
+
+.npc-btn.active {
+  background: #fff;
+  color: #d97706;
+  box-shadow: 0 0 0 1px #d97706;
+}
+
+/* NPC Hover Tooltip with Typing Effect */
+.npc-btn::after {
+  content: attr(data-name);
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #f59e0b;
+  font-family: 'Nunito', sans-serif;
+  font-size: 3px;
+  font-weight: 900;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  clip-path: inset(-10px 100% -10px -10px);
+}
+
+.npc-btn:hover::after {
+  opacity: 1;
+  animation: npcTyping 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes npcTyping {
+  0% {
+    clip-path: inset(-10px 100% -10px -10px);
+  }
+
+  100% {
+    clip-path: inset(-10px -10px -10px -10px);
+  }
+}
+
+/* NPC Popup Overlay & Card (RPG Maker Dialogue Style) */
+#npcPopup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 850;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.3);
+  /* subtle backdrop */
+}
+
+#npcPopup.visible {
+  display: block;
+  pointer-events: all;
+  cursor: pointer;
+  /* indicates clicking anywhere advances/closes */
+}
+
+#npc-card {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 90vw;
+  height: 300px;
+  background: rgba(25, 25, 35, 0.85);
+  /* dark semi-transparent RPG background */
+  border: 4px solid #a6855b;
+  /* classic JRPG blue border */
+  box-shadow: 0 0 0 2px #c4d4e5 inset, 0 10px 30px rgba(0, 0, 0, 0.7);
+  /* white inner highlight + outer drop shadow */
+  border-radius: 8px;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 24px;
+  animation: dialogOpen 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+@keyframes dialogOpen {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes dialogClose {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px) scale(0.95);
+  }
+}
+
+#npc-card.closing {
+  animation: dialogClose 0.2s ease-in forwards;
+}
+
+/* Bouncing Continue Arrow at bottom center */
+#npc-card::after {
+  content: '▼';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 0 #111;
+  animation: bounceArrow 0.6s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes bounceArrow {
+  from {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  to {
+    transform: translateX(-50%) translateY(6px);
+  }
+}
+
+
+
+/* JRPG Nameplate Tab attached to top-left */
+#npcHeader {
+  position: absolute;
+  top: -36px;
+  left: 24px;
+  background: #a6885b;
+  border: 3px solid #a68c5b;
+  box-shadow: 0 0 0 2px #e5ddc4 inset;
+  border-radius: 8px 8px 0 0;
+  padding: 4px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-bottom: none;
+}
+
+#npcNameText {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 0 #111;
+  letter-spacing: 0.05em;
+}
+
+#npcCloseBtn {
+  display: none;
+  /* hidden since clicking anywhere closes */
+}
+
+/* Character Portrait on the left */
+#npcPhoto {
+  width: auto;
+  height: 25vh;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+#npcPhotoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Speech Text on the right */
+#npcSpeech {
+  flex: 1;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+#npcSpeechText {
+  font-family: 'Nunito', monospace;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 2px 2px 0 #111, 0 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  font-style: normal;
+}

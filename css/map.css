@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
+/* =========================================
+   1. GLOBAL STYLES & TYPOGRAPHY
+   ========================================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,6 +17,9 @@ body {
   height: 100vh;
 }
 
+/* =========================================
+   2. MAP LAYOUT & VIEWPORT
+   ========================================= */
 #viewport {
   width: 100vw;
   height: 100vh;
@@ -43,14 +49,18 @@ body {
 #mapImg {
   display: block;
   width: 1280px;
-  /* fixed display sha*/
+  /* fixed display */
   height: auto;
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-/*buttons per building*/
+/* =========================================
+   3. INTERACTIVE ELEMENTS (MAP MARKERS)
+   ========================================= */
+
+/* Building Buttons */
 .building-btn {
   position: absolute;
   background: #ffffff;
@@ -81,7 +91,63 @@ body {
   transform: translate(-50%, -50%) scale(1.06);
 }
 
-/* controls */
+/* NPC Buttons (Pixel Art Style) */
+.npc-btn {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  z-index: 20;
+  pointer-events: all;
+  background: #f59e0b;
+  image-rendering: pixelated;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.npc-btn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 1px #fff, 1px 1px 0 1px rgba(0, 0, 0, 0.7);
+}
+
+.npc-btn.active {
+  background: #fff;
+  color: #d97706;
+  box-shadow: 0 0 0 1px #d97706;
+}
+
+/* NPC Hover Tooltip with Typing Effect */
+.npc-btn::after {
+  content: attr(data-name);
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #f59e0b;
+  font-family: 'Nunito', sans-serif;
+  font-size: 3px;
+  font-weight: 900;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  clip-path: inset(-10px 100% -10px -10px);
+}
+
+.npc-btn:hover::after {
+  opacity: 1;
+  animation: npcTyping 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes npcTyping {
+  0% { clip-path: inset(-10px 100% -10px -10px); }
+  100% { clip-path: inset(-10px -10px -10px -10px); }
+}
+
+/* =========================================
+   4. UI CONTROLS (ZOOM)
+   ========================================= */
 .controls {
   margin-top: 3%;
   position: fixed;
@@ -123,6 +189,9 @@ body {
   opacity: 0.5;
 }
 
+/* =========================================
+   5. BUILDING INFO POPUP
+   ========================================= */
 #popupOverlay {
   display: none;
   position: fixed;
@@ -158,7 +227,6 @@ body {
     opacity: 0;
     transform: translateY(-50%) translateX(-20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
@@ -262,6 +330,9 @@ body {
   background: #f59e0b;
 }
 
+/* =========================================
+   6. SPEECH BUBBLE & MASCOT
+   ========================================= */
 #speechBubble {
   position: absolute;
   top: 300px;
@@ -310,88 +381,28 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(20px);
   }
 }
 
-/* npc-btn */
-.npc-btn {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border: none;
-  border-radius: 0;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-  z-index: 20;
-  pointer-events: all;
-  background: #f59e0b;
-  image-rendering: pixelated;
-  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
-}
-
-.npc-btn:hover {
-  transform: scale(1.15);
-  box-shadow: 0 0 0 1px #fff, 1px 1px 0 1px rgba(0, 0, 0, 0.7);
-}
-
-.npc-btn.active {
-  background: #fff;
-  color: #d97706;
-  box-shadow: 0 0 0 1px #d97706;
-}
-
-/* NPC Hover Tooltip with Typing Effect */
-.npc-btn::after {
-  content: attr(data-name);
-  position: absolute;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #f59e0b;
-  font-family: 'Nunito', sans-serif;
-  font-size: 3px;
-  font-weight: 900;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  clip-path: inset(-10px 100% -10px -10px);
-}
-
-.npc-btn:hover::after {
-  opacity: 1;
-  animation: npcTyping 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
-@keyframes npcTyping {
-  0% {
-    clip-path: inset(-10px 100% -10px -10px);
-  }
-
-  100% {
-    clip-path: inset(-10px -10px -10px -10px);
-  }
-}
-
-/* NPC Popup Overlay & Card (RPG Maker Dialogue Style) */
+/* =========================================
+   7. NPC DIALOGUE POPUP (JRPG STYLE)
+   ========================================= */
 #npcPopup {
   display: none;
   position: fixed;
   inset: 0;
   z-index: 850;
   pointer-events: none;
-  background: rgba(0, 0, 0, 0.3);
-  /* subtle backdrop */
+  background: rgba(0, 0, 0, 0.3); /* subtle backdrop */
 }
 
 #npcPopup.visible {
   display: block;
   pointer-events: all;
-  cursor: pointer;
-  /* indicates clicking anywhere advances/closes */
+  cursor: pointer; /* indicates clicking anywhere advances/closes */
 }
 
 #npc-card {
@@ -402,12 +413,9 @@ body {
   width: 100%;
   max-width: 90vw;
   height: 300px;
-  background: rgba(25, 25, 35, 0.85);
-  /* dark semi-transparent RPG background */
-  border: 4px solid #a6855b;
-  /* classic JRPG blue border */
-  box-shadow: 0 0 0 2px #c4d4e5 inset, 0 10px 30px rgba(0, 0, 0, 0.7);
-  /* white inner highlight + outer drop shadow */
+  background: rgba(25, 25, 35, 0.85); /* dark semi-transparent RPG background */
+  border: 4px solid #a6855b; /* classic JRPG blue border */
+  box-shadow: 0 0 0 2px #c4d4e5 inset, 0 10px 30px rgba(0, 0, 0, 0.7); /* white inner highlight + outer drop shadow */
   border-radius: 8px;
   pointer-events: all;
   display: flex;
@@ -422,7 +430,6 @@ body {
     opacity: 0;
     transform: translateX(-50%) translateY(20px) scale(0.95);
   }
-
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
@@ -434,7 +441,6 @@ body {
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
   }
-
   to {
     opacity: 0;
     transform: translateX(-50%) translateY(20px) scale(0.95);
@@ -463,13 +469,10 @@ body {
   from {
     transform: translateX(-50%) translateY(0);
   }
-
   to {
     transform: translateX(-50%) translateY(6px);
   }
 }
-
-
 
 /* JRPG Nameplate Tab attached to top-left */
 #npcHeader {
@@ -498,8 +501,7 @@ body {
 }
 
 #npcCloseBtn {
-  display: none;
-  /* hidden since clicking anywhere closes */
+  display: none; /* hidden since clicking anywhere closes */
 }
 
 /* Character Portrait on the left */
@@ -542,4 +544,66 @@ body {
   line-height: 1.5;
   letter-spacing: 0.03em;
   font-style: normal;
+}
+
+/* =========================================
+   8. NPC DIALOGUE CHOICES
+   ========================================= */
+
+/* Hide continue arrow if choices are active */
+#npc-card.has-choices::after {
+  display: none;
+}
+
+#npcChoices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.npc-choice-btn {
+  background: rgba(166, 133, 91, 0.2);
+  border: 2px solid #a6855b;
+  border-radius: 6px;
+  color: #ffffff;
+  padding: 8px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 0px #111;
+}
+
+.npc-choice-btn:hover {
+  background: #a6855b;
+  transform: translateX(6px);
+  box-shadow: 0 0 10px rgba(166, 133, 91, 0.6);
+}
+
+.npc-choice-btn::before {
+  content: '➢';
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.npc-choice-btn:hover::before {
+  opacity: 1;
+}
+
+/* Goodbye Button Specifics */
+.npc-goodbye-btn {
+  background: rgba(180, 80, 80, 0.25);
+  border-color: #b45050;
+}
+
+.npc-goodbye-btn:hover {
+  background: #b45050;
+  box-shadow: 0 0 10px rgba(180, 80, 80, 0.6);
 }

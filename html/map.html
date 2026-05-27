@@ -18,8 +18,7 @@
           <a href="../html/index.html">RoarMore</a>
           <nav>
             <a href="map.html">Explore</a>
-            <a href="../html/program.html">Programs</a>
-            <a href="contact.html">Contact</a>
+            
           </nav>
         </div>
       </div>
@@ -34,9 +33,43 @@
         <button class="building-btn" data-building="ceit" style="left:78%; top:56%;">CEIT</button>
 
         <button class="npc-btn" data-npc="NPC_1_Dex" data-name="Talk to Dex"
-          style="left:59.805%; top:60.5%;"></button>
+          style="left:59.4%; top:60.5%;"></button>
+        <button class="npc-btn" data-npc="NPC_2_Kent" data-name="Talk to Kent"
+          style="left:66.55%; top:61%;"></button>
+        <button class="npc-btn" data-npc="NPC_3_Lhian" data-name="Talk to Lhian"
+          style="left:27.15%; top:68.5%;"></button>
+        <button class="npc-btn" data-npc="NPC_4_Spenzer" data-name="Talk to Spenzer"
+          style="left:80.1%; top:69.5%;"></button>
+        <button class="npc-btn" data-npc="NPC_5_Charls" data-name="Talk to Charls"
+          style="left:35.5%; top:24.5%;"></button>
+        <button class="npc-btn" data-npc="NPC_6_Brent" data-name="Talk to Brent"
+          style="left:74.2%; top:82.7%;"></button>
+        <button class="npc-btn" data-npc="NPC_7_Dustin" data-name="Talk to Dustin"
+          style="left: 28.1%; top:84.75%;"></button>
+        <button class="npc-btn" data-npc="NPC_8_Christian" data-name="Talk to Christian"
+          style="left: 45.6%; top:62.9%;"></button>  
+        <button class="npc-btn" data-npc="NPC_9_Kath" data-name="Talk to Kath"
+          style="left: 74.3%; top:53%;"></button>  
+        <button class="npc-btn" data-npc="NPC_10_Carlo" data-name="Talk to Carlo"
+          style="left: 31.5%; top:33.75%;"></button>  
 
+        <button class="npc-btn" data-npc="NPC_11_Nestor" data-name="Talk to Nestor"
+          style="left: 22.3%; top:29%;"></button>
+        <button class="npc-btn" data-npc="NPC_12_Kurt" data-name="Talk to Kurt"
+          style="left: 52.65%; top:45%;"></button>
+        <button class="npc-btn" data-npc="NPC_13_Cielo" data-name="Talk to Cielo"
+          style="left: 73.5%; top:82%;"></button>
+        <button class="npc-btn" data-npc="NPC_14_Charles" data-name="Talk to Charles"
+          style="left: 81.2%; top:69%;"></button>
+        <button class="npc-btn" data-npc="NPC_15_Abram" data-name="Talk to Abram"
+          style="left:82%; top:30%;"></button>
 
+        <button class="npc-btn" id="npc-4pics" data-npc="NPC_16_MaamJas" data-name="Talk to Ma'am Jas"
+          style="left:82.2%; top:48%;"></button>
+        <button class="npc-btn" id="npc-geoguessr" data-npc="NPC_17_SirJed" data-name="Talk to Sir Jed"
+          style="left:88.9%; top:67%;"></button>
+        <button class="npc-btn" id="npc-quiz" data-npc="NPC_18_SirRey" data-name="Talk to Sir Rey"
+          style="left:2.6%; top:59%;"></button>
       </div>
     </div>
   </div>
@@ -44,38 +77,53 @@
   <div class="controls">
     <button class="zoom-btn" id="zoomIn">+</button>
     <button class="zoom-btn" id="zoomOut">−</button>
+    <button class="zoom-btn" id="helpBtn">?</button>
   </div>
 
   <div id="popupOverlay">
-
     <div id="infoCard">
       <div id="cardHeader">
         <span id="cardTitle">Department Name</span>
         <button id="cardCloseBtn">✕</button>
       </div>
-      <div id="cardPhoto">
-        <img id="cardPhotoImg" src="" alt="Building photo" />
+      <div id="floorButtons">
+        <button onclick="showFloor('ground')">
+          Ground Floor
+        </button>
+
+        <button onclick="showFloor('second')">
+          2nd Floor
+        </button>
+
+        <button onclick="showFloor('third')">
+          3rd Floor
+        </button>
+
+        <button onclick="showFloor('fourth')">
+          4th Floor
+        </button>
+
       </div>
-      <div id="cardDesc">
-        <p id="cardDescText"></p>
-      </div>
-      <button id="enterBtn">Enter</button>
+      <div id="floorImages"></div>
     </div>
-
-
     <div id="speechBubble">
       <p id="speechText"></p>
     </div>
+    <img id="roary" src="../img/characters/NPC_0_Rawrie.gif" alt="Roary">
+    </div>
 
-
-    <img id="roary" src="../img/roary.png" alt="Roary the mascot">
-  </div>
-
+  /* NPC Popup */
   <div id="npcPopup">
+    <img id="npcSpeechImage" src="" alt="NPC Image" />
+    <div id="npcSpeechGrid" style="display: none;">
+      <img src="" alt="Grid Image 1" />
+      <img src="" alt="Grid Image 2" />
+      <img src="" alt="Grid Image 3" />
+      <img src="" alt="Grid Image 4" />
+    </div>
     <div id="npc-card">
       <div id="npcHeader">
         <span id="npcNameText"></span>
-        <button id="npcCloseBtn">✕</button>
       </div>
       <div id="npcPhoto">
         <img id="npcPhotoImg" src="" alt="NPC photo" />
@@ -84,6 +132,29 @@
         <p id="npcSpeechText"></p>
         <div id="npcChoices"></div>
       </div>
+    </div>
+  </div>
+
+  <!-- Help Legend -->
+  <div id="helpLegend" class="legend-card">
+    <div class="legend-header">
+      <span>Map Guide</span>
+      <button class="legend-close-btn" id="legendCloseBtn">✕</button>
+    </div>
+    <div class="legend-content">
+      <div class="legend-item">
+        <span class="legend-color-box orange"></span>
+        <span class="legend-text">Information NPC</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-color-box blue"></span>
+        <span class="legend-text">Mini Game NPC</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-color-box red"></span>
+        <span class="legend-text">Cannot Interact Yet</span>
+      </div>
+      <p>Zoom In to see NPC Buttons</p>
     </div>
   </div>
 

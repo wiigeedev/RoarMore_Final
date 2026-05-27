@@ -17,6 +17,27 @@ body {
   height: 100vh;
 }
 
+@font-face {
+  font-family: 'PixelTitle';
+  src: url('../fonts/MunroSmall-wPZw.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PixelText';
+  src: url('../fonts/Munro-2LYe.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PixelNarrow';
+  src: url('../fonts/MunroNarrow-vaO4.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* =========================================
    2. MAP LAYOUT & VIEWPORT
    ========================================= */
@@ -31,6 +52,35 @@ body {
 
 #viewport.dragging {
   cursor: grabbing;
+}
+
+/* CRT Scanline Effect Overlay */
+#viewport::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+      rgba(0, 0, 0, 0.35) 0px,  
+    rgba(0, 0, 0, 0.35) 0.5px,  
+    transparent 2px,
+    transparent 4px            
+  );
+  pointer-events: none;
+  z-index: 999;
+  animation: crtFlicker 0.1s infinite alternate;
+}
+/* Vignette */
+#viewport::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+@keyframes crtFlicker {
+  from { opacity: 0.96; }
+  to   { opacity: 1; }
 }
 
 #mapLayer {
@@ -63,20 +113,25 @@ body {
 /* Building Buttons */
 .building-btn {
   position: absolute;
-  background: #ffffff;
-  border: 3px solid #4a3475;
-  border-radius: 995px;
+  background: rgba(25, 25, 35, 0.85); 
+  border: 4px solid #a6855b; 
+  box-shadow: 0 0 0 2px #c4d4e5 inset, 0 10px 30px rgba(0, 0, 0, 0.7); 
   padding: 6px 20px;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'PixelTitle', sans-serif;
   font-weight: 900;
-  font-size: 11px;
-  color: #111;
+  font-size: 1rem;
+  color: #ffffff;
   cursor: pointer;
   white-space: nowrap;
   letter-spacing: 0.04em;
-  transition: filter 0.15s, transform 0.1s;
+  transition: filter 0.15s, transform 0.1s, opacity 0.3s;
   z-index: 20;
   transform: translate(-50%, -50%);
+}
+
+#viewport.zoomed-in .building-btn {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .building-btn:hover {
@@ -99,9 +154,10 @@ body {
   border: none;
   border-radius: 0;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.3s;
   z-index: 20;
-  pointer-events: all;
+  pointer-events: none;
+  opacity: 0;
   background: #f59e0b;
   image-rendering: pixelated;
   box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
@@ -118,6 +174,36 @@ body {
   box-shadow: 0 0 0 1px #d97706;
 }
 
+
+#npc-4pics.npc-btn{
+  background: #61cad1;
+}
+
+#npc-4pics.npc-btn::after{
+  color: #61cad1;
+}
+
+#npc-geoguessr.npc-btn, #npc-quiz.npc-btn{
+  background: #d16161;
+}
+
+#npc-geoguessr.npc-btn::after, #npc-quiz.npc-btn::after{
+  color: #d16161;
+}
+
+
+#npc-geoguessr-obtained.npc-btn, #npc-quiz-obtained.npc-btn{
+  background: #61cad1;
+}
+
+#npc-geoguessr-obtained.npc-btn::after, #npc-quiz-obtained.npc-btn::after{
+  color: #61cad1;
+}
+
+#viewport.zoomed-in .npc-btn {
+  opacity: 1;
+  pointer-events: all;
+}
 /* NPC Hover Tooltip with Typing Effect */
 .npc-btn::after {
   content: attr(data-name);
@@ -125,10 +211,12 @@ body {
   bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
-  color: #f59e0b;
-  font-family: 'Nunito', sans-serif;
-  font-size: 3px;
-  font-weight: 900;
+  color: #d97706;
+  padding: 1.5px 3px;
+  font-family: 'PixelTitle', sans-serif;
+  font-size: 4px;
+  font-weight: 800;
+  text-shadow: 0.5px 0.5px 0 #000;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
@@ -190,7 +278,7 @@ body {
 }
 
 /* =========================================
-   5. BUILDING INFO POPUP
+   5. BUILDING INFO POPUP (GLASSMORPHISM STYLE)
    ========================================= */
 #popupOverlay {
   display: none;
@@ -205,20 +293,20 @@ body {
 }
 
 #infoCard {
-  position: absolute;
+  position: fixed;
   top: 50%;
-  left: 30px;
-  height: 630px;
+  left: 2%;
   transform: translateY(-50%);
-  width: 300px;
-  background: rgb(122, 92, 68, 0.55);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px #111;
-  pointer-events: all;
+  width: 62vw;
+  height: 82vh;
+  background: rgba(25, 25, 35, 0.85);
+  border: 4px solid #a6855b;
+  box-shadow: 0 0 0 2px #c4d4e5 inset, 0 10px 30px rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  pointer-events: all;
+  padding: 28px;
   animation: slideInLeft 0.25s ease;
 }
 
@@ -234,100 +322,117 @@ body {
 }
 
 #cardHeader {
-  padding: 12px 14px 10px;
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  gap: 8px;
-  background: transparent;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 #cardTitle {
-  font-family: 'Nunito', sans-serif;
+  color: white;
+  font-size: 3rem;
   font-weight: 800;
-  font-size: 0.88rem;
-  color: #fff;
-  line-height: 1.35;
-  flex: 1;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  font-family: 'PixelTitle', sans-serif;
 }
 
 #cardCloseBtn {
-  width: 26px;
-  height: 26px;
+  background: #ff7b7b;
+  color: white;
+  border: none;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.45);
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  font-size: 0.75rem;
+  font-size: 28px;
   cursor: pointer;
+  transition: 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  transition: background 0.15s;
-  pointer-events: all;
 }
 
 #cardCloseBtn:hover {
-  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(90deg) scale(1.08);
+  background: #ff4d4d;
 }
 
-#cardPhoto {
-  margin: 0 12px;
-  border-radius: 14px;
-  overflow: hidden;
-  height: 200px;
-  background: #5a4030;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-  flex-shrink: 0;
+/* FLOOR BUTTONS */
+#floorButtons {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 14px;
 }
 
-#cardPhotoImg {
+#floorButtons button {
+  background: linear-gradient(135deg, #ffb347, #ff7b00);
+  color: white;
+  border: none;
+  padding: 13px 22px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
+}
+
+#floorButtons button:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 10px 20px rgba(255, 120, 0, 0.35);
+}
+
+/* IMAGE AREA */
+#floorImages {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 18px;
+  margin-top: 10px;
+  flex: 1;
+  min-height: 0;
+  padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+#floorImages img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  border-radius: 20px;
+  transition: 0.3s;
+  border: 4px solid rgba(255, 255, 255, 0.55);
+  background: rgba(0, 0, 0, 0.3);
+  scroll-snap-align: center;
 }
 
-#cardDesc {
-  margin: 10px 12px 0;
-  background: #fff;
-  width: 275px;
-  height: 300px;
-  border-radius: 14px;
-  padding: 12px 13px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+#floorImages img:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
-#cardDescText {
-  font-family: 'Nunito', sans-serif;
-  font-size: 0.74rem;
-  color: #333;
-  line-height: 1.55;
+/* SCROLLBAR */
+#floorImages::-webkit-scrollbar {
+  width: 8px;
 }
 
-#enterBtn {
-  display: block;
-  margin: 10px 15px;
-  width: 120px;
-  background: #fff;
-  color: #111;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+#floorImages::-webkit-scrollbar-thumb {
+  background: #ff9f43;
   border-radius: 10px;
-  padding: 10px;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 800;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background 0.15s;
-  pointer-events: all;
-  text-align: center;
-  letter-spacing: 0.03em;
 }
 
-#enterBtn:hover {
-  background: #f59e0b;
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.image-grid img {
+  width: 100%;
+  max-width: 450px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 20px;
 }
 
 /* =========================================
@@ -335,14 +440,17 @@ body {
    ========================================= */
 #speechBubble {
   position: absolute;
-  top: 300px;
-  right: 150px;
-  width: 350px;
-  height: 150px;
-  background: #fff;
-  border-radius: 18px;
-  padding: 14px 16px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+  right: 5%;
+  top: 20%;
+  width: 30%;
+  margin-left:65%;
+  background: white;
+  padding: 15px;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
   pointer-events: none;
   animation: fadeIn 0.3s ease 0.1s both;
 }
@@ -358,19 +466,18 @@ body {
 }
 
 #speechText {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  font-size: 0.82rem;
+  font-family: 'PixelNarrow', sans-serif;
+  font-size: 1.5rem;
   color: #333;
   line-height: 1.5;
 }
 
 #roary {
   position: absolute;
-  bottom: 0;
-  right: 10px;
-  width: 500px;
-  height: auto;
+  right: 15px;
+  bottom: 0%;
+  width: 420px;
+  z-index: 1000;
   pointer-events: none;
   animation: fadeIn 0.3s ease 0.05s both;
   filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.4));
@@ -383,7 +490,7 @@ body {
   }
   to {
     opacity: 1;
-    transform: translateY(20px);
+    transform: translateY(0);
   }
 }
 
@@ -451,20 +558,6 @@ body {
   animation: dialogClose 0.2s ease-in forwards;
 }
 
-/* Bouncing Continue Arrow at bottom center */
-#npc-card::after {
-  content: '▼';
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #ffffff;
-  font-size: 1.2rem;
-  text-shadow: 2px 2px 0 #111;
-  animation: bounceArrow 0.6s infinite alternate ease-in-out;
-  pointer-events: none;
-}
-
 @keyframes bounceArrow {
   from {
     transform: translateX(-50%) translateY(0);
@@ -492,17 +585,15 @@ body {
 }
 
 #npcNameText {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'PixelTitle', sans-serif;
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   color: #ffffff;
   text-shadow: 2px 2px 0 #111;
   letter-spacing: 0.05em;
 }
 
-#npcCloseBtn {
-  display: none; /* hidden since clicking anywhere closes */
-}
+
 
 /* Character Portrait on the left */
 #npcPhoto {
@@ -535,9 +626,44 @@ body {
   height: 100%;
 }
 
+#npcSpeechImage, #npcSpeechGrid {
+  display: none; 
+  margin: 0 auto 10px; 
+  max-width: 55vh;
+  height: 55vh; 
+  margin-bottom: 12px;
+  margin-top: 10vh;
+  border-radius: 8px;
+  animation: speechImageFadeIn 0.3s ease both;
+}
+
+#npcSpeechGrid {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+}
+
+#npcSpeechGrid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+@keyframes speechImageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 #npcSpeechText {
-  font-family: 'Nunito', monospace;
-  font-size: 1.5rem;
+  font-family: 'PixelText', sans-serif;
+  font-size: 1.25rem;
   font-weight: 800;
   color: #ffffff;
   text-shadow: 2px 2px 0 #111, 0 2px 4px rgba(0, 0, 0, 0.8);
@@ -563,13 +689,13 @@ body {
 }
 
 .npc-choice-btn {
-  background: rgba(166, 133, 91, 0.2);
-  border: 2px solid #a6855b;
+  background: rgba(91, 166, 91, 0.2);
+  border: 2px solid #5da65b;
   border-radius: 6px;
   color: #ffffff;
   padding: 8px 16px;
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.1rem;
+  font-family: 'PixelText', sans-serif;
+  font-size: 1.25rem;
   font-weight: 800;
   text-align: left;
   cursor: pointer;
@@ -582,19 +708,9 @@ body {
 }
 
 .npc-choice-btn:hover {
-  background: #a6855b;
+  background: #5ba65b;
   transform: translateX(6px);
-  box-shadow: 0 0 10px rgba(166, 133, 91, 0.6);
-}
-
-.npc-choice-btn::before {
-  content: '➢';
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-
-.npc-choice-btn:hover::before {
-  opacity: 1;
+  box-shadow: 0 0 10px rgba(91, 166, 101, 0.6);
 }
 
 /* Goodbye Button Specifics */
@@ -606,4 +722,112 @@ body {
 .npc-goodbye-btn:hover {
   background: #b45050;
   box-shadow: 0 0 10px rgba(180, 80, 80, 0.6);
+}
+
+/* =========================================
+   9. LEGEND CARD STYLES
+   ========================================= */
+.legend-card {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  background: rgba(25, 25, 35, 0.95);
+  border: 4px solid #a6855b;
+  box-shadow: 0 0 0 2px #c4d4e5 inset, 0 10px 30px rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  padding: 20px;
+  z-index: 900;
+  color: white;
+  animation: legendOpen 0.2s ease-out;
+}
+
+.legend-card.visible {
+  display: block;
+}
+
+@keyframes legendOpen {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.legend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-family: 'PixelTitle', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-shadow: 2px 2px 0 #111;
+}
+
+.legend-close-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.legend-close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.legend-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-family: 'PixelText', sans-serif;
+  font-size: 1.25rem;
+  text-shadow: 1px 1px 0 #111;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.legend-color-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.legend-color-box.orange {
+  background: #f59e0b;
+  border: 2px solid #fff;
+}
+
+.legend-color-box.blue {
+  background: #61cad1;
+  border: 2px solid #fff;
+}
+
+.legend-color-box.red {
+  background: #d16161;
+  border: 2px solid #fff;
+}
+
+.legend-text {
+  color: #ffffff;
 }
